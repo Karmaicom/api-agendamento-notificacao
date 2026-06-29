@@ -10,9 +10,14 @@ services:
       POSTGRES_USER: javanauta
       POSTGRES_PASSWORD: Javanauta@2026
     ports:
-      - "5433:5432"
+      - "5432:5432"
     volumes:
       - postgres_data_apiagendamentonotificacao:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d db_agendamento" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     networks:
       - api_agendamento_network
 
@@ -31,6 +36,18 @@ services:
       - postgres
     networks:
       - api_agendamento_network
+
+  app:
+    build: .
+    container_name: agendamento
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/bd-apiagendamentonotificacao
+      SPRING_DATASOURCE_USERNAME: javanauta
+      SPRING_DATASOURCE_PASSWORD: Javanauta@2026
+    ports:
+      - "8080:8080"
 
 volumes:
   postgres_data_apiagendamentonotificacao:

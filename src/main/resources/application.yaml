@@ -2,5 +2,29 @@ spring:
   application:
     name: api-agendamento-notificacao
 
+  datasource:
+    #url: {$SPRING_DATASOURCE_URL}
+    #username: {$SPRING_DATASOURCE_USERNAME}
+    #password: {$SPRING_DATASOURCE_PASSWORD}
+    url: jdbc:postgresql://localhost:5432/bd-apiagendamentonotificacao
+    username: javanauta
+    password: Javanauta@2026
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        highlight_sql: true
+        use_sql_comments: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE
+    org.hibernate.tool.schema: DEBUG
+
 server:
   port: 8081
+

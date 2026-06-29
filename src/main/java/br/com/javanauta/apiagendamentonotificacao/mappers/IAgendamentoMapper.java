@@ -5,9 +5,7 @@ import br.com.javanauta.apiagendamentonotificacao.dtos.AgendamentoResponseDTO;
 import br.com.javanauta.apiagendamentonotificacao.entities.Agendamento;
 import org.mapstruct.Mapper;
 
-import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
-
-@Mapper(componentModel = SPRING)
+@Mapper(componentModel = "spring")
 public interface IAgendamentoMapper {
 
     Agendamento paraEntidade(AgendamentoRequestDTO dto);
