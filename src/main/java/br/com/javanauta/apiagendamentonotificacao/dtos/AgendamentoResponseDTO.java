@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 public record AgendamentoResponseDTO(
         Long id,
-        String emailDestinatorio,
+        String emailDestinatario,
         String telefoneDestinatario,
         String mensagem,
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
