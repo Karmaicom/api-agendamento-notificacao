@@ -2,6 +2,7 @@ package br.com.javanauta.apiagendamentonotificacao.services;
 
 import br.com.javanauta.apiagendamentonotificacao.dtos.AgendamentoRequestDTO;
 import br.com.javanauta.apiagendamentonotificacao.dtos.AgendamentoResponseDTO;
+import br.com.javanauta.apiagendamentonotificacao.exceptions.NotFoundException;
 import br.com.javanauta.apiagendamentonotificacao.mappers.IAgendamentoMapper;
 import br.com.javanauta.apiagendamentonotificacao.repositories.AgendamentoRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,4 +21,11 @@ public class AgendamentoService {
                         mapper.paraEntidade(agendamento)));
     }
 
+    public AgendamentoResponseDTO buscarAgendamentoPorId(Long id) {
+        var founded = repository.findById(id);
+        if (!founded.isPresent()) {
+            throw new NotFoundException("Agendamento não encontrado para o id: " + id);
+        }
+        return mapper.paraDto(founded.get());
+    }
 }
